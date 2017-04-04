@@ -7,7 +7,8 @@ async function fetchAll (req, res, next) {
   })
   res.status(200)
   .json({
-    body: body
+    status: 'success',
+    payload: body
   })
 }
 

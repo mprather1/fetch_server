@@ -6,14 +6,14 @@ chai.use(chaiHttp)
 
 const expect = chai.expect
 
-describe('fetch', function () {
+describe('Fetch Server...', function () {
   it('should fetch from server at /api/fetch GET', function (done) {
     chai.request(server)
     .get('/api/fetch')
     .end(function (err, res) {
-      console.log(res.body)
       expect(res).to.have.status(200)
-      // expect(res.body[0]).to.have.property('id')
+      expect(res.body).to.have.status('success')
+      expect(res.body.payload[0]).to.have.property('id')
       done()
     })
   })
