@@ -1,10 +1,16 @@
 import got from 'got'
+import url from 'url'
 
-async function fetchAll (req, res, next) {
-  const {body} = await got('http://localhost:8000/api/models', {
+async function fetchAllModels (req, res, options) {
+  const {serverAddress} = options
+  
+  const address = url.resolve(serverAddress, '/api/models')
+  
+  const {body} = await got(address, {
     json: true,
     timeout:15000
   })
+  
   res.status(200)
   .json({
     status: 'success',
@@ -13,5 +19,5 @@ async function fetchAll (req, res, next) {
 }
 
 export default {
-  fetchAll
+  fetchAllModels
 }

@@ -7,8 +7,8 @@
   "author": "Michael Prather",
   "license": "MIT",
   "scripts": {
-    "start": "NODE_ENV=development PORT=8001 TZ='America/Chicago' node build/server.js",
-    "dev": "NODE_ENV=development PORT=8001 TZ='America/Chicago' nodemon build/server.js",
+    "start": "SERVER_ADDRESS=http://localhost:8000 NODE_ENV=development PORT=8001 TZ='America/Chicago' node build/server.js",
+    "dev": "SERVER_ADDRESS=http://localhost:8000 NODE_ENV=development PORT=8001 TZ='America/Chicago' nodemon build/server.js",
     "test": "PORT=8001 TZ='America/Chicago' NODE_ENV=test mocha build/test -t 10000",
     "build": "babel -d build src",
     "babel:watch": "babel --watch -d build src | ts '[%Y-%m-%d %H:%M:%S]'"
@@ -22,6 +22,7 @@
     "morgan": "^1.8.1",
     "pg": "^6.1.5",
     "pg-promise": "^5.6.4",
+    "url": "^0.11.0",
     "winston-color": "^1.0.0"
   },
   "devDependencies": {
