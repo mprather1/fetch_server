@@ -1,7 +1,7 @@
 import got from 'got'
 import url from 'url'
 
-async function fetchAllModels (req, res, options) {
+async function fetchAllModels (req, res, mext, options) {
   const {serverAddress} = options
   
   const address = url.resolve(serverAddress, '/api/models')
