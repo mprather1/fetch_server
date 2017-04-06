@@ -5,6 +5,10 @@ import getRouter from './routes'
 import {Server} from 'http'
 import chalk from 'chalk'
 import winston from 'winston-color'
+import favicon from 'serve-favicon'
+import path from 'path'
+
+const _parentDir = path.dirname(__dirname)
 
 const options = {
   app: express(),
@@ -13,14 +17,18 @@ const options = {
   serverAddress: process.env.SERVER_ADDRESS,
   logger: winston
 }
+
 const { app, environment, port, logger } = options
 
 if (environment !== 'test') {
   app.use(morgan('dev'))
 }
 
+app.use(favicon(path.join(__dirname, 'resources', 'images', 'favicon.png')))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+app.use('/css', express.static(path.join(_parentDir, 'node_modules', 'bootstrap', 'dist', 'css')))
+app.use(express.static(path.join(__dirname, 'static')))
 
 const router = getRouter(options)
 

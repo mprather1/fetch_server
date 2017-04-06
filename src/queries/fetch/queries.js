@@ -12,10 +12,7 @@ async function fetchAllModels (req, res, options) {
   })
   
   res.status(200)
-  .json({
-    status: 'success',
-    payload: body
-  })
+  .json(body)
 }
 
 async function createModel (req, res, options) {
