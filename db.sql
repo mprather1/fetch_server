@@ -11,9 +11,6 @@ CREATE TABLE models (
 );
 
 
-INSERT INTO models ( name, attribute )
-VALUES ( 'test', 1 );
-
 DROP DATABASE IF EXISTS fetch_test;
 CREATE DATABASE fetch_test;
 

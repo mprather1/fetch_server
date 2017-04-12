@@ -1,14 +1,14 @@
 {
   "name": "fetchserver",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Server fetches data from other server",
   "main": "build/server.js",
   "repository": "https://github.com/mprather1/fetch_server",
   "author": "Michael Prather",
   "license": "MIT",
   "scripts": {
-    "start": "SERVER_ADDRESS=http://localhost:8000 NODE_ENV=development PORT=8001 TZ='America/Chicago' node build/server.js",
-    "dev": "SERVER_ADDRESS=http://localhost:8000 NODE_ENV=development PORT=8001 TZ='America/Chicago' nodemon build/server.js",
+    "start": "SERVER_ADDRESS=http://localhost:55460 NODE_ENV=development PORT=8001 TZ='America/Chicago' node build/server.js",
+    "dev": "SERVER_ADDRESS=http://localhost:55460 NODE_ENV=development PORT=8001 TZ='America/Chicago' nodemon build/server.js",
     "test": "SERVER_ADDRESS=http://localhost:8000 PORT=8001 TZ='America/Chicago' NODE_ENV=test mocha build/test -t 10000",
     "build": "babel -d build src",
     "watch": "babel --watch -d build src | ts '[%Y-%m-%d %H:%M:%S]'"
@@ -26,6 +26,8 @@
     "jquery": "^3.1.1",
     "pg": "^6.1.2",
     "pg-promise": "^5.5.8",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.0",
     "serve-favicon": "^2.4.0",
     "underscore": "^1.8.3",
     "winston-color": "^1.0.0"
