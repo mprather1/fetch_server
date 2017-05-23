@@ -4,18 +4,21 @@ import ModelsView from './views/ModelsView'
 
 const Controller = Marionette.Object.extend({
   initialize: function (options) {
+    this.app = options.app
+
+    const app = this.app
+
     const models = new Models()
+
     models.fetch({
       success: (data) => {
-        console.log('success')
+        app.view.showChildView('main', new ModelsView({ collection: models }))
       },
-      failure: (err) => {
+
+      error: (err) => {
         console.log(err)
       }
     })
-
-    this.app = options.app
-    this.app.view.showChildView('main', new ModelsView({ collection: models }))
   }
 })
 

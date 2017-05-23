@@ -1,12 +1,15 @@
+import 'babel-polyfill'
+import config from './_config'
 import express from 'express'
 import bodyParser from 'body-parser'
+import httpervert from 'httpervert'
+import helmet from 'helmet'
+import path from 'path'
 import morgan from 'morgan'
-import getRouter from './routes'
-import {Server} from 'http'
-import chalk from 'chalk'
 import winston from 'winston-color'
 import favicon from 'serve-favicon'
-import path from 'path'
+import getRouter from './routes'
+import pkg from '../package.json'
 
 const _parentDir = path.dirname(__dirname)
 
@@ -15,14 +18,17 @@ const options = {
   port: process.env.PORT || 8001,
   environment: process.env.NODE_ENV || 'development',
   serverAddress: process.env.SERVER_ADDRESS,
-  logger: winston
+  logger: winston,
+  packageName: pkg.name,
+  config: config
 }
 
-const { app, environment, port, logger } = options
+const { app, environment } = options
 
-if (environment !== 'test') {
-  app.use(morgan('dev'))
-}
+app.use(helmet())
+
+const server = httpervert(options)
+const router = getRouter(options)
 
 app.use(favicon(path.join(__dirname, 'resources', 'images', 'favicon.png')))
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -30,14 +36,15 @@ app.use(bodyParser.json())
 app.use('/css', express.static(path.join(_parentDir, 'node_modules', 'bootstrap', 'dist', 'css')))
 app.use(express.static(path.join(__dirname, 'static')))
 
-const router = getRouter(options)
+if (environment !== 'test') {
+  app.use(morgan('dev'))
+}
 
 app.use('/api', router)
 
-const server = Server(app).listen(port, () => {
-  if (environment !== 'test') {
-    logger.info(chalk.bgBlack.green('listening on port', port + '...'))
-  }
-})
+const serverConfig = {
+  server: server,
+  options: options
+}
 
-export default server
+export default serverConfig

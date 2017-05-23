@@ -11,13 +11,14 @@ describe('Fetch Server...', function () {
     chai.request(server)
     .get('/api/fetch')
     .end(function (err, res) {
+      expect(err).to.be.null // eslint-disable-line
       expect(res).to.have.status(200)
       expect(res.body).to.have.status('success')
       expect(res.body.payload[0]).to.have.property('id')
       done()
     })
   })
-  
+
   it('should create a model on remote server at /api/create POST', function (done) {
     const object = {
       name: 'testName',
@@ -27,7 +28,7 @@ describe('Fetch Server...', function () {
     .post('/api/fetch')
     .send(object)
     .end(function (err, res) {
-      expect(err).to.be.null
+      expect(err).to.be.null // eslint-disable-line
       expect(res).to.have.status(200)
       done()
     })

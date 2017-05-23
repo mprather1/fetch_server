@@ -1,5 +1,7 @@
+import config from '../_config'
+
 const Model = Backbone.Model.extend({
-  urlRoot: 'http://localhost:8001/api/fetch'
+  urlRoot: config.url + 'api/fetch'
 })
 
 export default Model
